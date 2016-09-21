@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mac_id: 
+  saidby: MyText
+  content: MyText
+
+two:
+  mac_id: 
+  saidby: MyText
+  content: MyText

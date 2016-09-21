@@ -1,0 +1,67 @@
+/* put global css here instead of application.scss for cleaner code */
+
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
+.navbar-right > li > a {
+    transition: 0.4s all;
+}
+
+
+body {
+  padding-top: 60px;
+  background: url(dark_wood.png) repeat;
+}
+
+.container {
+  width: 98vw !important;
+}
+
+#home {
+  background: url(bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  margin-top: 50px;
+}
+
+.overlayhometitle {
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 50%;
+    margin: auto;
+    background-color: rgba(255,255,255,0.9);
+}
+
+.homepagepanel {
+    width: 50% !important;
+    margin: auto !important;
+    background-color: rgba(0,0,0,0.8) !important;
+    border-radius: 20px !important;
+    padding-bottom: 20px;
+}
+
+.homepagepanel-body {
+  color: #fff !important;
+}
+
+.newpanel {
+    background-color: rgba(150,150,150,0.2) !important;
+    padding-bottom: 15px;
+}
+
+.newpanel-body {
+  color: #ddd !important;
+}
+
+.emailpanel {
+    background-color: rgba(0,0,0,0.8) !important;
+    padding-bottom: 15px;
+}
+
+.emailpanel-body {
+  color: #ddd !important;
+}

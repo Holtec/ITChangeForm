@@ -1,0 +1,17 @@
+<% @body_id = "home" %>
+<div class="row">
+  <div class="panel panel-default homepagepanel">
+    <div class="panel-body homepagepanel-body">
+      <h1 align="center">Holtec MAC Request Form</h1>
+      <br/><hr/>
+      <div align="center">
+        <br/>
+        <%= link_to "Create a new request", new_mac_path, class: 'btn btn-lg btn-success' %>
+        <br/><br/>
+        <hr/>
+        <%= link_to "Browse existing requests", mac_index_path, class: 'btn btn-default' %>
+        <%= link_to "Analytics", analytics_path, class: 'btn btn-default' %> 
+      </div>
+    </div>
+  </div>
+</div>

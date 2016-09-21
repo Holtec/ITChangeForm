@@ -1,0 +1,19 @@
+<% @body_id = "home" %>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default emailpanel">
+      <div class="panel-body emailpanel-body">
+        <h1 align="center">Add/Edit your current email address</h1>
+        <hr/>
+        <div align="center">
+          <br/>
+          <%= form_for :email, url: save_email_path, method: :post, html: { class: "form-inline", id: "" } do |f| %>
+            <%= f.text_field :address, placeholder: "Email address", value: "#{session[:email]}", class: 'form-control', style: "width: 70%", :required => true  %>
+            <%= f.submit "Save", class: "btn btn-primary" %>
+          <% end %>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

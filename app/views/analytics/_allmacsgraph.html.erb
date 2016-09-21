@@ -1,0 +1,16 @@
+<div class="allmacs-margin">
+<div class="row">
+    <div class="col-sm-12">
+        <h4 align="center">All MAC requests submitted in the last week</h4>
+        <div id="allmacscontainer" style="height: 350px;">
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+  //set the javascript variables for the graph before its rendered
+  var allmacslabels = [<% @macsbyday.each do |x| %> "<%= x.first.to_s %>", <% end %>]
+  var allmacsdata = [<% @macsbyday.each do |x| %> "<%= x.second.to_s %>", <% end %>]
+  //render the big line graph in the canvas tag
+  allmacsgraph(allmacslabels, allmacsdata);
+</script>

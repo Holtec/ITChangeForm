@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-primary newpanel">
+      <div class="panel-heading" align="center">
+        <b>Browse all requests</b>
+      </div>
+      <div class="panel-body newpanel-body">
+        <table id="maclist" class="table table-bordered table-hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Division</th>
+              <th>What</th>
+              <th>When</th>
+              <th>Status</th>
+              <th>Requester</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  if (<%= Mac.count %> > 0) {
+  var mactable = $('#maclist').dataTable( {
+  "order": [[ 0, "desc" ]],
+  "bDeferRender": true,
+  "ajax": {
+    "url": "/api.json",
+    "type": "GET"
+  }
+} );
+ $( "#maclist" ).on( "click", 'tbody tr', function() {
+   window.location.href = "/mac/"+$(this).children("td:first").text();
+} );
+  };
+} );
+</script>

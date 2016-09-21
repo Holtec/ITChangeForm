@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary newpanel">
+      <div class="panel-heading" align="center">
+        <b>Editing MAC request <%= link_to mac_details_path(params[:id]), style: "color: #ccc" do %>#<%=@mac.id%><% end %></b>
+      </div>
+      <div class="panel-body newpanel-body">
+        <div>
+          <%= form_for @mac, url: change_mac_path(params[:id]), method: :patch, html: { class: "", id: "" } do |f| %>
+          <%= f.hidden_field :status, :value => "Updated" %>
+          <div class="form-group">
+            <%= f.label :division, "Which division will this change take place in?" %>
+            <%= f.select :division, options_for_select(Division.pluck(:name), @mac.division), {}, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :what, "What change are you making?" %>
+            <%= f.text_field :what, placeholder: "What", class: 'form-control', :required => true  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :why, "Why are you making this change?" %>
+            <%= f.text_area :why, placeholder: "Why", class: 'form-control', :rows => 2, :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :when, "When will this change take place?" %>
+            <%= f.text_field :when, placeholder: "When", class: 'form-control', :required => true  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :how, "How will you implement your change?" %>
+            <%= f.text_area :how, placeholder: "How", class: 'form-control', :rows => 2, :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :success, "What will this acheive on success?" %>
+            <%= f.text_area :success, placeholder: "Success", class: 'form-control', :rows => 2, :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :rollback, "What is the rollback plan if this fails?" %>
+            <%= f.text_area :rollback, placeholder: "Rollback", class: 'form-control', :rows => 2, :required => true %>
+          </div>
+          <%= f.submit "Update MAC request", class: "btn btn-primary btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>

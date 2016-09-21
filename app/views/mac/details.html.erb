@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="panel panel-primary newpanel">
+      <div class="panel-heading" align="center">
+        <b>Details for MAC #<%=params[:id]%></b>
+        <% if session[:email] == @mac.requester and @mac.status != "approved" and @mac.status != "succeeded" and @mac.status != "failed" %><%= link_to "Edit", edit_mac_path(params[:id]), class: "btn btn-default", style: "float: right; margin-top: -6px;" %><% end %>
+        <% if session[:email] == @mac.requester and @mac.status == "approved" and @mac.status != "succeeded" and @mac.status != "failed"  %><button class="btn btn-success" style="float: right; margin-top: -6px;" type="button" data-toggle="collapse" href="#collapseSuccess" aria-expanded="false" aria-controls="collapseSuccess">Succeeded</button><% end %>
+        <% if session[:email] == @mac.requester and @mac.status == "approved" and @mac.status != "succeeded" and @mac.status != "failed"  %><button class="btn btn-warning" style="float: left; margin-top: -6px;" type="button" data-toggle="collapse" href="#collapseFailed" aria-expanded="false" aria-controls="collapseFailed">Failed</button><% end %>
+        <% if session[:email] != @mac.requester and @mac.status != "succeeded" and @mac.status != "failed"  %><%= link_to "Approve", approve_mac_path(params[:id]), class: "btn btn-success", style: "float: right; margin-top: -6px;margin-left: -75px;" %><% end %>
+        <% if session[:email] != @mac.requester and @mac.status != "succeeded" and @mac.status != "failed"  %><button class="btn btn-warning" style="float: left; margin-top: -6px;" type="button" data-toggle="collapse" href="#collapseDeny" aria-expanded="false" aria-controls="collapseDeny">Deny</button><% end %>
+      </div>
+      <div class="panel-body newpanel-body">
+        <div class="collapse" id="collapseSuccess">
+          <div class="well">
+            <%= form_for :mac, url: succeeded_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
+              <div class="form-group">
+                <%= f.label :successreason, "Enter any success notes you may have", style: 'color: #333' %>
+                <%= f.text_field :successreason, placeholder: "Enter any success notes you may have...", class: 'form-control', :required => true  %>
+              </div>
+              <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="collapse" id="collapseFailed">
+          <div class="well">
+            <%= form_for :mac, url: failed_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
+              <div class="form-group">
+                <%= f.label :failreason, "Enter a reason for the change failure", style: 'color: #333' %>
+                <%= f.text_field :failreason, placeholder: "Reason for MAC rollback/failure...", class: 'form-control', :required => true  %>
+              </div>
+              <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="collapse" id="collapseDeny">
+          <div class="well">
+            <%= form_for :mac, url: deny_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
+              <div class="form-group">
+                <%= f.label :reason, "Enter reason for MAC request denial", style: 'color: #333' %>
+                <%= f.text_field :reason, placeholder: "Your denial reason...", class: 'form-control', :required => true  %>
+              </div>
+              <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+        <table class="table">
+          <tr>
+            <td style="border-top: none;"><b>Requested by: </b></td>
+            <td style="border-top: none;"><%= @mac.requester %></td>
+          </tr>
+          <tr>
+            <td><b>Status: </b></td>
+            <td><%= @mac.status %></td>
+          </tr>
+          <tr>
+            <td><b>For Division: </b></td>
+            <td><%= @mac.division %></td>
+          </tr>
+          <tr>
+            <td><b>What: </b></td>
+            <td><%= @mac.what %></td>
+          </tr>
+          <tr>
+            <td><b>Why: </b></td>
+            <td><%= @mac.why %></td>
+          </tr>
+          <tr>
+            <td><b>When: </b></td>
+            <td><%= @mac.when %></td>
+          </tr>
+          <tr>
+            <td><b>How: </b></td>
+            <td><%= @mac.how %></td>
+          </tr>
+          <tr>
+            <td><b>Success: </b></td>
+            <td><%= @mac.success %></td>
+          </tr>
+          <tr>
+            <td><b>Rollback: </b></td>
+            <td><%= @mac.rollback %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="panel panel-primary newpanel">
+      <div class="panel-heading" align="center">
+        <b>Comments </b>
+        <button class="btn btn-default" style="float: right; margin-top: -6px;" type="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+          Add Comment
+        </button>
+      </div>
+      <div class="panel-body newpanel-body">
+        <div class="collapse" id="collapseComment">
+          <div class="well">
+            <%= form_for @mac.comment.build, url: create_comment_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
+              <%= f.hidden_field :saidby, :value => session[:email] %>
+              <div class="form-group">
+                <%= f.label :content, "Enter your comment", style: 'color: #333' %>
+                <%= f.text_field :content, placeholder: "Your comment...", class: 'form-control', :required => true  %>
+              </div>
+              <%= f.submit "Add comment", class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+        <% if @comments.empty? %>
+        <div align="center">
+          <b>No Comments.</b>
+        </div>
+        <% else %>
+            <table class="table">
+              <thead>
+              <th>Commenter</th>
+              <th>Comment</th>
+              </thead>
+              <tbody>
+                <% @comments.reverse.each do |x| %>
+                    <tr>
+                      <td><b><%= x.saidby %></b> <small><%= time_ago_in_words(x.created_at) %> ago</small></td>
+                      <td><%= x.content %></td>
+                    </tr>
+                <% end %>
+              </tbody>
+            </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

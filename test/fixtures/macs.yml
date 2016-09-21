@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  what: MyText
+  why: MyText
+  how: MyText
+  success: MyText
+  rollback: MyText
+  division: MyText
+  createdby: MyText
+
+two:
+  what: MyText
+  why: MyText
+  how: MyText
+  success: MyText
+  rollback: MyText
+  division: MyText
+  createdby: MyText
