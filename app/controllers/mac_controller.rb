@@ -77,7 +77,7 @@ class MacController < ApplicationController
     @mac.status = "failed"
     @mac.failreason = params[:mac][:failreason]
     if @mac.save
-      Newmacemail.failed_request_email(session[:email], @mac.id, @mac.failedreason).deliver_now
+      Newmacemail.failed_request_email(session[:email], @mac.id, @mac.failreason).deliver_now
       flash[:notice] = "MAC ID: #{@mac.id} FAILED to implement"
       return redirect_to  mac_details_path(params[:id])
     else

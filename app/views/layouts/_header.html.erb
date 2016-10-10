@@ -7,9 +7,15 @@
   			<span class="icon-bar"></span>
   			<span class="icon-bar"></span>
   		</button>
-    	<%= link_to root_url, class: "navbar-brand" do %>
-        <b>IT MAC Change Form</b>
-    	<% end %>
+      <% if session[:email].empty? %>
+        <%= link_to root_url, class: "navbar-brand" do %>
+          <b>IT MAC Change Form</b>
+        <% end %>
+      <% else %>
+        <%= link_to mac_index_path, class: "navbar-brand" do %>
+          <b>IT MAC Change Form</b>
+        <% end %>
+      <% end %>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
