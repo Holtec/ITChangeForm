@@ -15,7 +15,7 @@
             <%= form_for :mac, url: succeeded_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
               <div class="form-group">
                 <%= f.label :successreason, "Enter any success notes you may have", style: 'color: #333' %>
-                <%= f.text_field :successreason, placeholder: "Enter any success notes you may have...", class: 'form-control', :required => true  %>
+                <%= f.text_field :successreason, placeholder: "Enter any success notes you may have...", class: 'form-control'  %>
               </div>
               <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
             <% end %>
@@ -26,7 +26,7 @@
             <%= form_for :mac, url: failed_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
               <div class="form-group">
                 <%= f.label :failreason, "Enter a reason for the change failure", style: 'color: #333' %>
-                <%= f.text_field :failreason, placeholder: "Reason for MAC rollback/failure...", class: 'form-control', :required => true  %>
+                <%= f.text_field :failreason, placeholder: "Reason for MAC rollback/failure...", class: 'form-control'  %>
               </div>
               <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
             <% end %>
@@ -37,7 +37,7 @@
             <%= form_for :mac, url: deny_mac_path(params[:id]), method: :post, html: { class: "", id: "" } do |f| %>
               <div class="form-group">
                 <%= f.label :reason, "Enter reason for MAC request denial", style: 'color: #333' %>
-                <%= f.text_field :reason, placeholder: "Your denial reason...", class: 'form-control', :required => true  %>
+                <%= f.text_field :reason, placeholder: "Your denial reason...", class: 'form-control'  %>
               </div>
               <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
             <% end %>
