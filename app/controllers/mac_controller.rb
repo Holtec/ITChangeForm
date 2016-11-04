@@ -36,7 +36,7 @@ class MacController < ApplicationController
     if @mac.save
       Newmacemail.approve_request_email(session[:email], @mac.id).deliver_now
       flash[:notice] = "Successfully approved MAC ID: #{@mac.id}"
-      return redirect_to  mac_details_path(params[:id])
+      return redirect_to  mac_index_path
     else
       flash[:alert] = "Failed to update MAC"
       return redirect_to  mac_details_path(params[:id])
@@ -50,7 +50,7 @@ class MacController < ApplicationController
     if @mac.save
       Newmacemail.deny_request_email(session[:email], @mac.id, @mac.reason).deliver_now
       flash[:notice] = "Successfully denied MAC ID: #{@mac.id}"
-      return redirect_to  mac_details_path(params[:id])
+      return redirect_to  mac_index_path
     else
       flash[:alert] = "Failed to update MAC"
       return redirect_to  mac_details_path(params[:id])
@@ -64,7 +64,7 @@ class MacController < ApplicationController
     if @mac.save
       Newmacemail.succeeded_request_email(session[:email], @mac.id, @mac.successreason).deliver_now
       flash[:notice] = "MAC ID: #{@mac.id} SUCCEEDED"
-      return redirect_to  mac_details_path(params[:id])
+      return redirect_to mac_index_path
     else
       flash[:alert] = "Failed to update MAC"
       return redirect_to  mac_details_path(params[:id])
@@ -79,7 +79,7 @@ class MacController < ApplicationController
     if @mac.save
       Newmacemail.failed_request_email(session[:email], @mac.id, @mac.failreason).deliver_now
       flash[:notice] = "MAC ID: #{@mac.id} FAILED to implement"
-      return redirect_to  mac_details_path(params[:id])
+      return redirect_to mac_index_path
     else
       flash[:alert] = "Failed to update MAC"
       return redirect_to  mac_details_path(params[:id])
@@ -104,7 +104,7 @@ class MacController < ApplicationController
     @mac = Mac.find(params[:id])
     if @mac.requester != session[:email]
       flash[:alert] = "You do not have permissions to edit this MAC"
-      return redirect_to root_path
+      return redirect_to mac_index_path
     end
   end
   
